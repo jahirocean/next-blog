@@ -2,11 +2,13 @@ import { formatDate, getBlogPosts } from "@/app/blog/utils";
 import Link from "next/link";
 
 export default function LatestPosts() {
-  let LatestPosts = getBlogPosts();
-  
+  const LatestPosts = getBlogPosts();
+
   return (
     <>
-      <h1 className="inline-block text-4xl lg:text-5xl">Recently Publisched</h1>
+      <h1 className="inline-block mt-6 font-heading text-4xl tracking-tight lg:text-5xl">
+        Recently Published
+      </h1>
       {LatestPosts.sort((a, b) => {
         if (
           new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
@@ -14,17 +16,18 @@ export default function LatestPosts() {
           return -1;
         }
         return 1;
-      })
-      .map((post)=>(
+      }).map((post) => (
         <article key={post.slug} className="text-wrap max-w-md my-10">
-            <Link href={"#"}>
+          <Link href={`/blog/${post.metadata.category}/${post.slug}`}>
             <h1 className="font-bold py-2 leading-5 hover:text-blue-400">
-            {post.metadata.title}
+              {post.metadata.title}
             </h1>
-            </Link>
+          </Link>
 
-            <p className="leading-8 my-5">{post.metadata.summary}</p>
-            <p className="text-sm text-muted-foreground">{formatDate(post.metadata.publishedAt)}</p>
+          <p className="leading-8 my-5">{post.metadata.summary}</p>
+          <p className="text-sm text-muted-foreground">
+            {formatDate(post.metadata.publishedAt)}
+          </p>
         </article>
       ))}
     </>

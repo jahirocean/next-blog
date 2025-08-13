@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable prefer-const */
+
+
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
