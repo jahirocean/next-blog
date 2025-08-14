@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Container from "@/components/Container";
 import { CustomMDX } from "@/components/mdx";
 import { BreadcrumbWithCustomSeparator } from "@/components/Breadcrumb";
+import ReportViews from "@/components/ReportViews";
 
 
 export async function generateStaticParams() {
@@ -27,6 +28,11 @@ export default async function page({ params }: { params: Promise<{ category: str
 
   return (
     <>
+    <ReportViews
+    category={post.metadata.category}
+    slug={post.slug}
+    title={post.metadata.title}
+    />
       <Header>
         <Container>
           <BreadcrumbWithCustomSeparator

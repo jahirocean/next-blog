@@ -9,7 +9,34 @@ generator client {
   output   = "../src/generated/prisma"
 }
 
-datasource db {
+/* datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+} */
+
+
+
+// prisma/schema.prisma
+datasource db {
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+  // uncomment next line if you use Prisma <5.10
+  // directUrl = env("DATABASE_URL_UNPOOLED")
 }
+
+model Blog {
+  id  Int @id @default(autoincrement())
+  slug String @unique
+  title String
+  category String
+  view_count Int @default(1)
+  updateAt DateTime @default(now())
+}
+
+model Subscriber {
+  id Int @id @default(autoincrement())
+  email String
+  is_subscribe Boolean @default(true)
+}
+
+
